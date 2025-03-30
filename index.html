@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Configurações básicas do documento -->
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres como UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configura viewport para responsividade -->
+    <title>Editor de Menu</title> <!-- Título da página -->
+    
+    <!-- Importação do Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Importação do arquivo CSS personalizado -->
+    <link rel="stylesheet" href="./css/Estilo.css">
+</head>
+<body>
+    <!-- Container principal que envolve todo o conteúdo -->
+    <div class="container">
+        <!-- Título principal centralizado -->
+        <h1 class="text-center mb-4">Editor de Menu</h1>
+        
+        <!-- Container flexível que organiza os painéis de edição e visualização -->
+        <div class="editor-container">
+            
+            <!-- PAINEL DE CONTROLES DO EDITOR (LADO ESQUERDO) -->
+        
+            <div class="editor-controls">
+                <h3>Controles do Menu</h3>
+                
+                <!-- Seção de upload de imagem -->
+                <div class="mb-3">
+                    <label for="menuImageUpload" class="form-label">Upload da Imagem do Menu:</label>
+                    <input type="file" class="form-control" id="menuImageUpload" accept="image/*">
+                    <small class="form-text text-muted">Selecione uma imagem do seu computador</small>
+                </div>
+                
+                <!-- Seção de posição da imagem (radio buttons) -->
+                <div class="mb-3">
+                    <label class="form-label">Posição da Imagem:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="imagePosition" id="imageAbove" value="above" checked>
+                        <label class="form-check-label" for="imageAbove">
+                            Acima do Menu
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="imagePosition" id="imageLeft" value="left">
+                        <label class="form-check-label" for="imageLeft">
+                            À Esquerda do Menu
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Seção de orientação do menu (radio buttons) -->
+                <div class="mb-3">
+                    <label class="form-label">Orientação do Menu:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="menuOrientation" id="horizontalMenu" value="horizontal" checked>
+                        <label class="form-check-label" for="horizontalMenu">
+                            Horizontal
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="menuOrientation" id="verticalMenu" value="vertical">
+                        <label class="form-check-label" for="verticalMenu">
+                            Vertical
+                        </label>
+                    </div>
+                </div>
+                
+                
+                <!-- SEÇÃO DE ESTILO DO MENU -->
+                
+                <h4 class="mt-4">Estilo do Menu</h4>
+                
+                <!-- Seletor de cor para o fundo do menu -->
+                <div class="color-picker-container">
+                    <label for="menuBackgroundColor">Cor de Fundo do Menu:</label>
+                    <input type="color" id="menuBackgroundColor" value="#f0f0f0">
+                </div>
+                
+                <!-- Seletor de cor para o fundo dos itens -->
+                <div class="color-picker-container">
+                    <label for="menuItemBackgroundColor">Cor de Fundo dos Itens:</label>
+                    <input type="color" id="menuItemBackgroundColor" value="#e0e0e0">
+                </div>
+                
+                <!-- Seletor de cor para o texto -->
+                <div class="color-picker-container">
+                    <label for="menuTextColor">Cor do Texto:</label>
+                    <input type="color" id="menuTextColor" value="#000000">
+                </div>
+                
+                
+                <!-- SEÇÃO DE TAMANHOS E ESPAÇAMENTOS -->
+                
+                <h4 class="mt-4">Tamanhos e Espaçamentos</h4>
+                
+                <!-- Controle deslizante para tamanho da fonte -->
+                <div class="mb-3">
+                    <label for="menuFontSize" class="form-label">Tamanho da Fonte (px):</label>
+                    <input type="range" class="form-range" min="10" max="30" step="1" value="16" id="menuFontSize">
+                    <div class="text-center" id="menuFontSizeValue">16px</div> <!-- Exibe o valor atual -->
+                </div>
+                
+                <!-- Controle deslizante para espaçamento interno -->
+                <div class="mb-3">
+                    <label for="menuItemPadding" class="form-label">Espaçamento Interno (px):</label>
+                    <input type="range" class="form-range" min="5" max="30" step="1" value="10" id="menuItemPadding">
+                    <div class="text-center" id="menuItemPaddingValue">10px</div>
+                </div>
+                
+                <!-- Controle deslizante para espaçamento entre itens -->
+                <div class="mb-3">
+                    <label for="menuItemMargin" class="form-label">Espaçamento Entre Itens (px):</label>
+                    <input type="range" class="form-range" min="0" max="20" step="1" value="2" id="menuItemMargin">
+                    <div class="text-center" id="menuItemMarginValue">2px</div>
+                </div>
+                
+                
+                <!-- SEÇÃO DE BORDAS -->
+            
+                <h4 class="mt-4">Bordas</h4>
+                
+                <!-- Controle deslizante para largura da borda -->
+                <div class="mb-3">
+                    <label for="menuBorderWidth" class="form-label">Largura da Borda (px):</label>
+                    <input type="range" class="form-range" min="0" max="10" step="1" value="1" id="menuBorderWidth">
+                    <div class="text-center" id="menuBorderWidthValue">1px</div>
+                </div>
+                
+                <!-- Seletor de cor para a borda -->
+                <div class="color-picker-container">
+                    <label for="menuBorderColor">Cor da Borda:</label>
+                    <input type="color" id="menuBorderColor" value="#cccccc">
+                </div>
+                
+                <!-- Seletor de estilo da borda (dropdown) -->
+                <div class="mb-3">
+                    <label for="menuBorderStyle" class="form-label">Estilo da Borda:</label>
+                    <select class="form-select" id="menuBorderStyle">
+                        <option value="none">Nenhuma</option>
+                        <option value="solid" selected>Sólida</option>
+                        <option value="dashed">Tracejada</option>
+                        <option value="dotted">Pontilhada</option>
+                        <option value="double">Dupla</option>
+                    </select>
+                </div>
+                
+                <!-- Controle deslizante para arredondamento da borda -->
+                <div class="mb-3">
+                    <label for="menuBorderRadius" class="form-label">Arredondamento da Borda (px):</label>
+                    <input type="range" class="form-range" min="0" max="20" step="1" value="4" id="menuBorderRadius">
+                    <div class="text-center" id="menuBorderRadiusValue">4px</div>
+                </div>
+                
+                
+                <!-- GERENCIAMENTO DE ITENS -->
+            
+                <h4 class="mt-4">Itens do Menu</h4>
+                
+                <!-- Container dinâmico para os itens do menu -->
+                <div class="mb-3">
+                    <div id="menuItems">
+                        <!-- Itens serão adicionados aqui via JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Botões para adicionar itens ou limpar tudo -->
+                <div class="d-flex gap-2 mb-4">
+                    <button class="btn btn-primary" id="addMenuItem">Adicionar Item</button>
+                    <button class="btn btn-danger" id="clearAllItems">Limpar Tudo</button>
+                </div>
+            </div>
+            
+           
+            <!-- /*ÁREA DE VISUALIZAÇÃO (LADO DIREITO)-->
+           
+            <div class="preview">
+                <h3>Visualização</h3>
+                <!-- Container onde o menu será renderizado -->
+                <div id="menuPreview" class="menu-preview-container mt-3">
+                    <!-- Preview será gerado dinamicamente via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Importação do arquivo JavaScript que contém a lógica do editor -->
+    <script src="./js/Script.js"></script>
+</body>
+</html>
