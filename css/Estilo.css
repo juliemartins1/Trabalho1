@@ -1,0 +1,155 @@
+/* Estilos gerais para o corpo da página */
+body {
+    font-family: Arial, sans-serif; /* Define a fonte padrão */
+    font-size: 14px; /* Tamanho base da fonte */
+    padding: 10px; /* Espaçamento interno */
+    background-color: #f8f9fa; /* Cor de fundo suave */
+}
+
+/* Container principal que centraliza o conteúdo */
+.container {
+    max-width: 1600px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza na página */
+}
+
+/* Container flexível para os painéis de editor e visualização */
+.editor-container {
+    display: flex; /* Layout flexível */
+    gap: 10px; /* Espaço entre os elementos */
+    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+}
+
+/* Estilos para o painel de controles do editor */
+.editor-controls {
+    flex: 1; /* Cresce para ocupar espaço disponível */
+    min-width: 400px; /* Largura mínima */
+    padding: 10px; /* Espaçamento interno */
+    background-color: lightpink; /* Cor de fundo */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+}
+
+/* Estilos para o painel de visualização */
+.preview {
+    flex: 1; /* Cresce para ocupar espaço disponível */
+    min-width: 300px; /* Largura mínima */
+    min-height: 300px; /* Altura mínima */
+    padding: 10px; /* Espaçamento interno */
+    background-color: #fff; /* Fundo branco */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+}
+
+/* Container da pré-visualização do menu */
+.menu-preview-container {
+    width: 100%; /* Ocupa toda a largura */
+    border: 2px dashed #ccc; /* Borda tracejada */
+    padding: 10px; /* Espaçamento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    min-height: 200px; /* Altura mínima */
+}
+
+/* Estilos base para a lista do menu */
+.menu-list {
+    list-style-type: none; /* Remove marcadores de lista */
+    padding: 0; /* Remove padding padrão */
+    margin: 0; /* Remove margem padrão */
+    display: flex; /* Layout flexível */
+    flex-wrap: wrap; /* Permite quebra de linha */
+}
+
+/* Modificador para menu vertical */
+.menu-list.vertical {
+    flex-direction: column; /* Itens em coluna */
+}
+
+/* Estilos para cada item do menu */
+.menu-item {
+    padding: 10px 15px; /* Espaçamento interno */
+    margin: 5px; /* Margem externa */
+    cursor: pointer; /* Cursor de ponteiro */
+    border-radius: 5px; /* Cantos arredondados */
+    transition: all 0.3s ease; /* Transição suave para hover */
+}
+
+/* Container para os seletores de cor */
+.color-picker-container {
+    display: flex; /* Layout flexível */
+    align-items: center; /* Alinha itens verticalmente */
+    margin-bottom: 10px; /* Margem inferior */
+}
+
+/* Estilos para os rótulos dos seletores de cor */
+.color-picker-container label {
+    margin-right: 10px; /* Margem à direita */
+    min-width: 150px; /* Largura mínima para alinhamento */
+}
+
+/* Container para a lista de itens do menu */
+#menuItems {
+    max-height: 200px; /* Altura máxima com scroll */
+    overflow-y: auto; /* Scroll vertical quando necessário */
+    margin-bottom: 15px; /* Margem inferior */
+}
+
+/* Container para cada controle de item do menu */
+.menu-item-control {
+    display: flex; /* Layout flexível */
+    align-items: center; /* Alinha itens verticalmente */
+    margin-bottom: 8px; /* Margem inferior */
+}
+
+/* Estilo para o input de texto dos itens */
+.menu-item-control input {
+    flex-grow: 1; /* Ocupa todo espaço disponível */
+    margin-right: 8px; /* Margem à direita */
+}
+
+/* Container para a imagem na pré-visualização */
+.preview-image-container {
+    margin-bottom: 15px; /* Margem inferior */
+    text-align: center; /* Centraliza a imagem */
+}
+
+/* Estilos para a imagem na pré-visualização */
+.preview-image {
+    max-width: 100%; /* Largura máxima */
+    max-height: 200px; /* Altura máxima */
+    display: block; /* Remove espaço extra abaixo */
+}
+
+/* Container para layout com imagem ao lado */
+.menu-with-image-side {
+    display: flex; /* Layout flexível */
+    align-items: flex-start; /* Alinha itens no topo */
+    gap: 20px; /* Espaço entre elementos */
+}
+
+/* Container para a imagem no layout lado a lado */
+.menu-image-side {
+    width: 200px; /* Largura fixa */
+    flex-shrink: 0; /* Impede que diminua */
+}
+
+/* Container para o conteúdo do menu no layout lado a lado */
+.menu-content-side {
+    flex-grow: 1; /* Ocupa todo espaço restante */
+}
+
+/* Media query para telas menores (responsividade) */
+@media (max-width: 768px) {
+    /* Empilha os painéis verticalmente */
+    .editor-container {
+        flex-direction: column;
+    }
+    
+    /* Empilha imagem e menu verticalmente */
+    .menu-with-image-side {
+        flex-direction: column;
+    }
+    
+    /* Faz a imagem ocupar toda a largura */
+    .menu-image-side {
+        width: 100%;
+    }
+}
