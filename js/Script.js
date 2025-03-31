@@ -21,14 +21,35 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupEventListeners() {
         // Evento para upload de imagem
         document.getElementById('menuImageUpload').addEventListener('change', handleImageUpload);
+        /* document.getElementById('menuImageUpload') Esta parte busca um elemento HTML específico na página que possui o ID 'menuImageUpload'. 
+        Este elemento é provavelmente um campo de upload de arquivo (<input type="file">) que permite aos usuários selecionar imagens do seu computador.
+        addEventListener('change', handleImageUpload); Esta parte adiciona um "ouvinte de evento" ao elemento que acabamos de selecionar:
+        O primeiro parâmetro 'change' indica qual tipo de evento estamos monitorando. O evento 'change' ocorre quando o usuário seleciona 
+        um arquivo usando o campo de upload.
+        O segundo parâmetro handleImageUpload é o nome da função que será executada quando o evento 'change' ocorrer.
+        */
         
         // Eventos para os botões principais
         document.getElementById('addMenuItem').addEventListener('click', handleAddMenuItem);
+        /*Esta linha de código adiciona um ouvinte de evento (event listener) a um elemento HTML com o ID 'addMenuItem',
+        que provavelmente é um botão na interface do usuário.
+       document.getElementById('addMenuItem') - Esta parte busca o elemento HTML que tem o ID 'addMenuItem'.
+        É um botão com um texto como "Adicionar Item"*/
         document.getElementById('clearAllItems').addEventListener('click', handleClearAllItems);
+        /*document.getElementById('clearAllItems') - Esta parte localiza um elemento HTML específico na página que possui o ID 'clearAllItems'. 
+        Este elemento é um botão com texto como "Limpar Tudo*/
         
         // Eventos para os controles de posição da imagem
         document.querySelectorAll('input[name="imagePosition"]').forEach(radio => {
             radio.addEventListener('change', updateMenuPreview);
+            /*document.querySelectorAll('input[name="imagePosition"]') - Este método busca todos os elementos <input> na página que têm o atributo name="imagePosition". 
+            Estes são provavelmente botões de opção (radio buttons) que permitem ao usuário escolher onde a imagem deve aparecer no item do menu (por exemplo: à esquerda do menu,acima do menu).
+            .forEach(radio => { ... }) - Este método executa a função fornecida para cada elemento encontrado pelo 
+            querySelectorAll. A variável radio representa cada botão de opção individual enquanto o código percorre a lista.
+             radio.addEventListener('change', updateMenuPreview); - Para cada botão de opção, 
+             adiciona um ouvinte para o evento 'change', que é acionado quando o usuário seleciona uma opção diferente. Quando isso acontece, a função updateMenuPreview é chamada.
+            Em resumo, este código garante que sempre que o usuário mudar a posição da imagem selecionando um botão de opção diferente,
+            a função updateMenuPreview será chamada para atualizar a pré-visualização do menu com a nova posição da imagem.*/
         });
         
         // Eventos para os controles de orientação do menu
@@ -36,13 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
             radio.addEventListener('change', updateMenuPreview);
         });
         
-        /*/ Eventos para os seletores de cor  
+        /* Eventos para os seletores de cor
         menuBackgroundColor: Seletor de cor para o fundo do menu
         menuItemBackgroundColor: Seletor de cor para o fundo dos itens do menu
         menuTextColor: Seletor de cor para o texto dos itens
         menuBorderColor: Seletor de cor para as bordas
         'input': O evento é disparado sempre que o valor do seletor de cor muda, seja por:
-        Seleção de uma nova cor no popup
+        Seleção de uma nova cor no pop-up
         Digitação manual de um valor hexadecimal
         Qualquer outra alteração no valor*/
         document.getElementById('menuBackgroundColor').addEventListener('input', updateMenuPreview);
@@ -70,19 +91,45 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('menuItemMarginValue').textContent = e.target.value + 'px';
             updateMenuPreview();
         });
+        /*document.getElementById('menuItemPadding') - Seleciona um elemento HTML com o ID 'menuItemPadding'.
+        Este provavelmente é um controle deslizante (<input type="range">) ou um campo numérico que permite ao usuário definir o valor do padding.
+        .addEventListener('input', function(e) { ... }) - Adiciona um ouvinte para o evento 'input', que é acionado enquanto o usuário está ajustando 
+        o valor (movendo o controle deslizante ou digitando no campo numérico).
+        O parâmetro e é o objeto do evento que contém informações sobre o evento ocorrido.
+    Dentro da função de callback:
+    document.getElementById('menuItemPaddingValue').textContent = e.target.value + 'px'; - Esta linha atualiza um elemento com
+    ID 'menuItemPaddingValue' para mostrar o valor atual do padding, acrescentando 'px' ao final para indicar a unidade
+    de medida. Este elemento provavelmente exibe o valor numérico ao lado do controle deslizante.
+    updateMenuPreview(); - Esta linha chama a função updateMenuPreview() para atualizar a pré-visualização do
+    menu com o novo valor de padding.*/
         
         // Eventos para controles de borda
         document.getElementById('menuBorderWidth').addEventListener('input', function(e) {
             document.getElementById('menuBorderWidthValue').textContent = e.target.value + 'px';
             updateMenuPreview();
         });
-        
+        /*document.getElementById('menuBorderWidth') - Seleciona um elemento HTML com o ID 'menuBorderWidth'.
+        Este provavelmente é um controle deslizante (<input type="range">)  definir a largura da borda dos itens do menu.
+        .addEventListener('input', function(e) { ... }) - Adiciona um ouvinte para o evento 'input', que é acionado enquanto o usuário está ajustando o valor (movendo o controle deslizante ou digitando no campo). O parâmetro e contém informações sobre o evento.
+    Dentro da função de callback:
+document.getElementById('menuBorderWidthValue').textContent = e.target.value + 'px'; -
+Esta linha atualiza um elemento com ID 'menuBorderWidthValue' para mostrar o valor atual da largura da borda, 
+acrescentando 'px' ao final. Este elemento exibe o valor numérico na interface.
+updateMenuPreview(); - Esta linha chama a função updateMenuPreview() para atualizar a pré-visualização do menu com
+a nova largura de borda.*/
         document.getElementById('menuBorderRadius').addEventListener('input', function(e) {
             document.getElementById('menuBorderRadiusValue').textContent = e.target.value + 'px';
             updateMenuPreview();
+
+            /* este código realiza duas ações quando o usuário ajusta o raio de borda:
+            Atualiza um texto na interface mostrando o valor atual (por exemplo: "8px")
+                Atualiza a pré-visualização do menu para mostrar como ficarão os cantos arredondados com o novo valor*/
         });
         
         document.getElementById('menuBorderStyle').addEventListener('change', updateMenuPreview);
+        /*este código garante que sempre que o usuário escolher um estilo de borda diferente na lista suspensa
+        (por exemplo, mudar de borda sólida para tracejada), 
+        a função updateMenuPreview() será chamada para atualizar a pré-visualização do menu com o novo estilo de borda.*/
     }
     
     // Manipula o upload de imagens
@@ -190,10 +237,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Cria o elemento de imagem
-        const imageElement = document.createElement('img');
-        imageElement.className = 'preview-image';
-        imageElement.src = uploadedImageData;
-        imageElement.alt = 'Imagem do Menu';
+        const imageElement = document.createElement('img');/* novo elemento é criado dinamicamente no documento usando o 
+        document.createElement('img')*/
+        imageElement.className = 'preview-image';/*define a classe CSS do elemento como preview-image permitindo ele ser estilizado
+        posteriormente pelo CSS*/
+        imageElement.src = uploadedImageData;/*Aqui a origem da imagem é definida*/
+        imageElement.alt = 'Imagem do Menu';/*o atributo alt é configuradopara imagem menu*/
         
         // Verifica a posição da imagem
         if (imagePosition === 'left') {
@@ -202,14 +251,14 @@ document.addEventListener('DOMContentLoaded', function() {
             sideContainer.className = 'menu-with-image-side';
             
             // Container para a imagem
-            const imageContainer = document.createElement('div');
-            imageContainer.className = 'menu-image-side';
-            imageContainer.appendChild(imageElement);
+            const imageContainer = document.createElement('div');/*Cria dinamicamente um novo div no documento*/
+            imageContainer.className = 'menu-image-side';/* define a classeName como menu-image-side para ser estilizado pelo Css*/
+            imageContainer.appendChild(imageElement);/*adiciona a imagem dentro da <div> imageContainer*/
             
             // Container para o menu
-            const menuContainer = document.createElement('div');
-            menuContainer.className = 'menu-content-side';
-            menuContainer.appendChild(menuList);
+            const menuContainer = document.createElement('div');/*Cria dinamicamente um novo div no documento*/
+            menuContainer.className = 'menu-content-side'; /* define a classeName como menu-content-side para ser estilizado pelo Css*/
+            menuContainer.appendChild(menuList);/*adiciona a lista dentro da <div> menuContainer*/
             
             // Monta a estrutura
             sideContainer.appendChild(imageContainer);
