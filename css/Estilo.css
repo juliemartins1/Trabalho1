@@ -36,14 +36,13 @@ body {
     padding: 15px;
     background-color: #fff;
     border-radius: 10px;
-    background-border:black;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Container da pré-visualização do menu */
 .menu-preview-container {
     width: 100%; /* Ocupa toda a largura */
-     border: 2px dashed #ccc; /* Borda tracejada */
+     border: 3px dashed #ccc; /* Borda tracejada */
      padding: 10px; /* Espaçamento interno */
      border-radius: 8px; /* Cantos arredondados */
      min-height: 200px; /* Altura mínima */
