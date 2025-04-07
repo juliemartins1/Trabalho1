@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Evento para upload de imagem
         document.getElementById('menuImageUpload').addEventListener('change', handleImageUpload);
         /* document.getElementById('menuImageUpload') Esta parte busca um elemento HTML específico na página que possui o ID 'menuImageUpload'. 
-        Este elemento é provavelmente um campo de upload de arquivo (<input type="file">) que permite aos usuários selecionar imagens do seu computador.
+        Este elemento é um campo de upload de arquivo (<input type="file">) que permite aos usuários selecionar imagens do seu computador.
         addEventListener('change', handleImageUpload); Esta parte adiciona um "ouvinte de evento" ao elemento que acabamos de selecionar:
         O primeiro parâmetro 'change' indica qual tipo de evento estamos monitorando. O evento 'change' ocorre quando o usuário seleciona 
         um arquivo usando o campo de upload.
