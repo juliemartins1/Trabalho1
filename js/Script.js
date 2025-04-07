@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Eventos para os botões principais
         document.getElementById('addMenuItem').addEventListener('click', handleAddMenuItem);
         /*Esta linha de código adiciona um ouvinte de evento (event listener) a um elemento HTML com o ID 'addMenuItem',
-        que provavelmente é um botão na interface do usuário.
        document.getElementById('addMenuItem') - Esta parte busca o elemento HTML que tem o ID 'addMenuItem'.
         É um botão com um texto como "Adicionar Item"*/
         document.getElementById('clearAllItems').addEventListener('click', handleClearAllItems);
@@ -43,13 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('input[name="imagePosition"]').forEach(radio => {
             radio.addEventListener('change', updateMenuPreview);
             /*document.querySelectorAll('input[name="imagePosition"]') - Este método busca todos os elementos <input> na página que têm o atributo name="imagePosition". 
-            Estes são provavelmente botões de opção (radio buttons) que permitem ao usuário escolher onde a imagem deve aparecer no item do menu (por exemplo: à esquerda do menu,acima do menu).
+            Estes são botões de opção (radio buttons) que permitem ao usuário escolher onde a imagem deve aparecer no item do menu (por exemplo: à esquerda do menu,acima do menu).
             .forEach(radio => { ... }) - Este método executa a função fornecida para cada elemento encontrado pelo 
             querySelectorAll. A variável radio representa cada botão de opção individual enquanto o código percorre a lista.
              radio.addEventListener('change', updateMenuPreview); - Para cada botão de opção, 
-             adiciona um ouvinte para o evento 'change', que é acionado quando o usuário seleciona uma opção diferente. Quando isso acontece, a função updateMenuPreview é chamada.
-            Em resumo, este código garante que sempre que o usuário mudar a posição da imagem selecionando um botão de opção diferente,
-            a função updateMenuPreview será chamada para atualizar a pré-visualização do menu com a nova posição da imagem.*/
+             adiciona um ouvinte para o evento 'change', que é acionado quando o usuário seleciona uma opção diferente. Quando isso acontece, a função updateMenuPreview é chamada.*/
         });
         
         // Eventos para os controles de orientação do menu
