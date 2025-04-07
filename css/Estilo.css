@@ -42,11 +42,11 @@ body {
 
 /* Container da pré-visualização do menu */
 .menu-preview-container {
-    width: 100%;  /* Alterado para ocupar 100% do container pai */
-    border: 2px dashed #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    min-height: 200px;
+    width: 100%; /* Ocupa toda a largura */
+     border: 2px dashed #ccc; /* Borda tracejada */
+     padding: 10px; /* Espaçamento interno */
+     border-radius: 8px; /* Cantos arredondados */
+     min-height: 200px; /* Altura mínima */
 }
 
 /* Estilos base para a lista do menu */
