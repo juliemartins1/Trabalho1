@@ -162,14 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
             permite ao usuário editar o texto de um item do menu. Usando o método appendChild(), 
             este campo de texto se torna um elemento filho dentro do container.*/
             itemControl.appendChild(removeButton);
-            /*itemControl.appendChild(removeButton);
-Esta linha adiciona o botão de remoção (removeButton) ao mesmo container de controle (itemControl), colocando-o logo após o campo de texto. 
-Este botão tem o símbolo "×" e permite ao usuário excluir o item específico do menu. 
-Ele também é adicionado como um elemento filho do container de controle.*/
+           
             menuItemsContainer.appendChild(itemControl);
-            /*Esta última linha adiciona todo o conjunto de controle de item (que agora contém tanto o campo de texto quanto o botão de remoção) ao 
-            container principal de itens do menu (menuItemsContainer). 
-            O menuItemsContainer é o elemento na interface que contém todos os controles de itens do menu.*/
+            
         });
     }
     
