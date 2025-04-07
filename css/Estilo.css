@@ -21,7 +21,8 @@ body {
 
 /* Estilos para o painel de controles do editor */
 .editor-controls {
-    flex: 0 0 45%; /* Largura fixa de 45% do container */
+    flex: 1; /* Cresce para ocupar espaço disponível */
+     min-width: 400px;
     padding: 15px;
     background-color: lightpink;
     border-radius: 8px;
@@ -40,7 +41,7 @@ body {
 
 /* Container da pré-visualização do menu */
 .menu-preview-container {
-    width: 100%; /* Alterado para ocupar 100% do container pai */
+    width: 100%;  /* Alterado para ocupar 100% do container pai */
     border: 2px dashed #ccc;
     padding: 10px;
     border-radius: 8px;
