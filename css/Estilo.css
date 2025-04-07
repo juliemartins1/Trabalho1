@@ -22,7 +22,7 @@ body {
 /* Estilos para o painel de controles do editor */
 .editor-controls {
     flex: 1; /* Cresce para ocupar espaço disponível */
-    min-width: 400px; /* Largura mínima */
+    min-width: 800px; /* Largura mínima */
     padding: 10px; /* Espaçamento interno */
     background-color: lightpink; /* Cor de fundo */
     border-radius: 8px; /* Cantos arredondados */
@@ -42,7 +42,7 @@ body {
 
 /* Container da pré-visualização do menu */
 .menu-preview-container {
-    width: 100%; /* Ocupa toda a largura */
+    width: 800px; 
     border: 2px dashed #ccc; /* Borda tracejada */
     padding: 10px; /* Espaçamento interno */
     border-radius: 8px; /* Cantos arredondados */
