@@ -30,7 +30,7 @@ body {
 
 /* Estilos para o painel de visualização */
 .preview {
-    flex: 0 0 45%; /* Largura fixa de 45% do container */
+    display: flex;
     min-height: 300px;
     padding: 15px;
     background-color: #fff;
