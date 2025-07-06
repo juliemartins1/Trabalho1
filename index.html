@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Páginas HTML</title>
+    
+    <link rel="stylesheet" href="./style/style.css">
+</head>
+<body>
+    <h1>Editor de Páginas HTML</h1>
+    
+    <div class="container">
+        <div class="editor-container">
+            <div class="tabs">
+                <div class="tab active" data-panel="header-panel">Cabeçalho</div>
+                <div class="tab" data-panel="menu-panel">Menu</div>
+                <div class="tab" data-panel="gallery-panel">Galeria</div>
+                <div class="tab" data-panel="form-panel">Formulário</div>
+                <div class="tab" data-panel="interactive-api-panel">API Interativa</div>
+                <div class="tab" data-panel="multi-api-panel">Múltiplas APIs</div>
+                <div class="tab" data-panel="footer-panel">Rodapé</div>
+                <div class="tab" data-panel="general-panel">Geral</div>
+            </div>
+            
+            <!-- Painel do Cabeçalho -->
+            <div id="header-panel" class="panel active">
+                <h2>Editar Cabeçalho</h2>
+                <label>Cor de Fundo do Cabeçalho:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="headerBgColor" value="#f8f8f8">
+                    <span id="headerBgColorValue">#f8f8f8</span>
+                </div>
+                
+                <div id="header-elements"></div>
+                <button id="add-header-element" class="btn-add">Adicionar Elemento</button>
+            </div>
+            
+            <!-- Painel do Menu -->
+            <div id="menu-panel" class="panel">
+                <h2>Editar Menu</h2>
+                <label>Cor de Fundo do Menu:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="menuBgColor" value="#333333">
+                    <span id="menuBgColorValue">#333333</span>
+                </div>
+                
+                <label>Cor do Texto do Menu:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="menuTextColor" value="#ffffff">
+                    <span id="menuTextColorValue">#ffffff</span>
+                </div>
+                
+                <h3>Itens do Menu</h3>
+                <div id="menu-items"></div>
+                <button id="add-menu-item" class="btn-add">Adicionar Item</button>
+            </div>
+            
+            <!-- Painel da Galeria -->
+            <div id="gallery-panel" class="panel">
+                <h2>Editar Galeria</h2>
+                <label>Cor de Fundo da Galeria:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="galleryBgColor" value="#f0f0f0">
+                    <span id="galleryBgColorValue">#f0f0f0</span>
+                </div>
+                
+                <label>Colunas por Linha:</label>
+                <input type="number" id="galleryColumns" value="3" min="1" max="4">
+                
+                <h3>Cards da Galeria</h3>
+                <div id="gallery-items"></div>
+                <button id="add-gallery-item" class="btn-add">Adicionar Card</button>
+            </div>
+            
+            <!-- Painel do Formulário -->
+            <div id="form-panel" class="panel">
+                <h2>Editar Formulário</h2>
+                <label>Título do Formulário:</label>
+                <input type="text" id="formTitle" value="Entre em Contato">
+                
+                <label>Cor de Fundo do Formulário:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="formBgColor" value="#f8f8f8">
+                    <span id="formBgColorValue">#f8f8f8</span>
+                </div>
+                
+                <label>Cor da Borda do Formulário:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="formBorderColor" value="#dddddd">
+                    <span id="formBorderColorValue">#dddddd</span>
+                </div>
+                
+                <h3>Campos do Formulário</h3>
+                <div id="form-fields"></div>
+                <button id="add-form-field" class="btn-add">Adicionar Campo</button>
+            </div>
+            
+            <!-- Painel da API Interativa -->
+            <div id="interactive-api-panel" class="panel">
+                <h2>API Interativa</h2>
+                <div class="api-info">
+                    <p>Selecione uma API e preencha os parâmetros necessários:</p>
+                </div>
+                
+                <label>Selecione uma API:</label>
+                <select id="apiType"></select>
+                
+                <div id="api-params" class="api-params-container"></div>
+                <button id="fetch-api-data" class="btn-fetch">Buscar Dados</button>
+                
+                <div id="api-response" class="api-response-container">
+                    <h3>Resposta da API</h3>
+                    <div id="api-response-content"></div>
+                </div>
+            </div>
+            
+            <!-- Painel de Múltiplas APIs -->
+            <div id="multi-api-panel" class="panel">
+                <h2>Múltiplas APIs</h2>
+                <div class="api-info">
+                    <p>Clique no botão para buscar dados de 3 APIs diferentes simultaneamente:</p>
+                </div>
+                
+                <button id="fetch-multiple-apis" class="btn-fetch">Buscar Dados</button>
+                
+                <div id="multi-api-response" class="api-response-container">
+                    <h3>Respostas das APIs</h3>
+                    <div id="multi-api-content" class="multi-api-grid"></div>
+                </div>
+            </div>
+            
+            <!-- Painel do Rodapé -->
+            <div id="footer-panel" class="panel">
+                <h2>Editar Rodapé</h2>
+                <label>Cor de Fundo do Rodapé:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="footerBgColor" value="#333333">
+                    <span id="footerBgColorValue">#333333</span>
+                </div>
+                
+                <label>Cor do Texto do Rodapé:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="footerTextColor" value="#ffffff">
+                    <span id="footerTextColorValue">#ffffff</span>
+                </div>
+                
+                <label>Texto do Rodapé:</label>
+                <textarea id="footerText" rows="3">© 2025 Minha Empresa</textarea>
+                
+                <label>Tamanho da Fonte:</label>
+                <input type="number" id="footerFontSize" value="14" min="10" max="24">
+            </div>
+            
+            <!-- Painel de Configurações Gerais -->
+            <div id="general-panel" class="panel">
+                <h2>Configurações Gerais</h2>
+                <label>Cor de Fundo da Página:</label>
+                <div class="color-picker-container">
+                    <input type="color" id="pageBgColor" value="#ffffff">
+                    <span id="pageBgColorValue">#ffffff</span>
+                </div>
+                
+                <label>Fonte da Página:</label>
+                <select id="pageFont">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="'Segoe UI', Tahoma, sans-serif">Segoe UI</option>
+                </select>
+                
+                <div class="button-group">
+                    <button id="show-generated-code">Mostrar Código</button>
+                    <button id="save-to-storage">Salvar</button>
+                    <button id="load-from-storage">Carregar</button>
+                    <button id="clear-storage" class="btn-remove">Limpar</button>
+                </div>
+                
+                <h3>Código HTML Gerado</h3>
+               <textarea id="generatedCode" readonly class="code-output"></textarea>
+            </div>
+        </div>
+        
+        <div class="preview-container">
+            <h2>Pré-visualização</h2>
+            <div id="preview"></div>
+        </div>
+    </div>
+    
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
