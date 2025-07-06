@@ -1,4 +1,3 @@
-// Estado global do editor
 const state = {
     headerElements: [],
     menuItems: [],
@@ -66,25 +65,27 @@ export function addHeaderElement() {
     updatePreview();
 }
 
-export function addMenuItem() {
+export function addMenuItem(image = null) {
     const id = 'menu-item-' + state.counters.menu++;
     const item = {
         id,
         text: 'Item ' + (state.menuItems.length + 1),
-        link: '#'
+        link: '#',
+        image: image || null,
+        imagePosition: 'left' // left, right, or none
     };
     
     state.menuItems.push(item);
     renderMenuItems();
     updatePreview();
 }
-
 export function addGalleryItem() {
     const id = 'gallery-item-' + state.counters.gallery++;
     const item = {
         id,
         title: 'Item ' + (state.galleryItems.length + 1),
-        description: 'Descrição do item'
+        description: 'Descrição do item',
+        image: null
     };
     
     state.galleryItems.push(item);
@@ -138,19 +139,35 @@ function renderMenuItems() {
     
     state.menuItems.forEach((item, index) => {
         const div = document.createElement('div');
-        div.className = 'menu-item';
+        div.className = item.image ? 'menu-item has-image' : 'menu-item';
         div.innerHTML = `
             <h4>Item ${index + 1}</h4>
             <label>Texto:</label>
             <input type="text" value="${item.text}" onchange="updateMenuItem('${item.id}', 'text', this.value)">
             <label>Link:</label>
             <input type="text" value="${item.link}" onchange="updateMenuItem('${item.id}', 'link', this.value)">
+            
+            ${item.image ? `
+                <div class="image-preview-container">
+                    <label>Imagem:</label>
+                    <img src="${item.image}" class="element-preview">
+                    <button type="button" onclick="removeMenuItemImage('${item.id}')" class="btn-remove-image">Remover Imagem</button>
+                </div>
+                <label>Posição da Imagem:</label>
+                <select onchange="updateMenuItem('${item.id}', 'imagePosition', this.value)">
+                    <option value="left" ${item.imagePosition === 'left' ? 'selected' : ''}>Esquerda</option>
+                    <option value="right" ${item.imagePosition === 'right' ? 'selected' : ''}>Direita</option>
+                </select>
+            ` : `
+                <label>Adicionar Imagem:</label>
+                <input type="file" id="menu-item-image-${item.id}" accept="image/*" onchange="handleMenuItemImageUpload('${item.id}', this)">
+            `}
+            
             <button type="button" onclick="removeMenuItem('${item.id}')" class="btn-remove">Remover Item</button>
         `;
         container.appendChild(div);
     });
 }
-
 function renderGalleryItems() {
     const container = document.getElementById('gallery-items');
     if (!container) return;
@@ -159,13 +176,25 @@ function renderGalleryItems() {
     
     state.galleryItems.forEach((item, index) => {
         const div = document.createElement('div');
-        div.className = 'gallery-item';
+        div.className = item.image ? 'gallery-item has-image' : 'gallery-item';
         div.innerHTML = `
             <h4>Item ${index + 1}</h4>
             <label>Título:</label>
             <input type="text" value="${item.title}" onchange="updateGalleryItem('${item.id}', 'title', this.value)">
             <label>Descrição:</label>
             <textarea onchange="updateGalleryItem('${item.id}', 'description', this.value)">${item.description}</textarea>
+            
+            ${item.image ? `
+                <div class="image-preview-container">
+                    <label>Imagem:</label>
+                    <img src="${item.image}" class="element-preview">
+                    <button type="button" onclick="removeGalleryItemImage('${item.id}')" class="btn-remove-image">Remover Imagem</button>
+                </div>
+            ` : `
+                <label>Adicionar Imagem:</label>
+                <input type="file" id="gallery-item-image-${item.id}" accept="image/*" onchange="handleGalleryItemImageUpload('${item.id}', this)">
+            `}
+            
             <button type="button" onclick="removeGalleryItem('${item.id}')" class="btn-remove">Remover Item</button>
         `;
         container.appendChild(div);
@@ -219,6 +248,7 @@ window.updateMenuItem = function(id, property, value) {
     }
 };
 
+
 window.updateGalleryItem = function(id, property, value) {
     const item = state.galleryItems.find(el => el.id === id);
     if (item) {
@@ -231,6 +261,47 @@ window.updateFormField = function(id, property, value) {
     const field = state.formFields.find(el => el.id === id);
     if (field) {
         field[property] = value;
+        updatePreview();
+    }
+};
+
+// Funções de manipulação de imagem no menu
+window.handleMenuItemImageUpload = function(itemId, input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const item = state.menuItems.find(el => el.id === itemId);
+        if (item) {
+            item.image = e.target.result;
+            renderMenuItems();
+            updatePreview();
+        }
+    };
+    reader.readAsDataURL(file);
+};
+window.handleGalleryItemImageUpload = function(itemId, input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const item = state.galleryItems.find(el => el.id === itemId);
+        if (item) {
+            item.image = e.target.result;
+            renderGalleryItems();
+            updatePreview();
+        }
+    };
+    reader.readAsDataURL(file);
+};
+
+window.removeMenuItemImage = function(itemId) {
+    const item = state.menuItems.find(el => el.id === itemId);
+    if (item) {
+        item.image = null;
+        renderMenuItems();
         updatePreview();
     }
 };
@@ -253,12 +324,22 @@ window.removeGalleryItem = function(id) {
     renderGalleryItems();
     updatePreview();
 };
+window.removeGalleryItemImage = function(itemId) {
+    const item = state.galleryItems.find(el => el.id === itemId);
+    if (item) {
+        item.image = null;
+        renderGalleryItems();
+        updatePreview();
+    }
+};
+
 
 window.removeFormField = function(id) {
     state.formFields = state.formFields.filter(el => el.id !== id);
     renderFormFields();
     updatePreview();
 };
+
 // Atualiza a visualização
 export function updatePreview() {
     const preview = document.getElementById('preview');
@@ -296,7 +377,8 @@ export function updatePreview() {
             <nav style="background-color: ${menuBgColor}; padding: 10px 0;">
                 <ul style="list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap;">
                     ${state.menuItems.map(item => `
-                        <li style="margin: 0 15px;">
+                        <li style="margin: 0 15px; display: flex; align-items: center; ${item.imagePosition === 'right' ? 'flex-direction: row-reverse;' : ''}">
+                            ${item.image ? `<img src="${item.image}" style="width: 30px; height: 30px; margin: ${item.imagePosition === 'right' ? '0 0 0 10px' : '0 10px 0 0'}; border-radius: 50%;">` : ''}
                             <a href="${item.link}" style="color: ${menuTextColor}; text-decoration: none; padding: 10px 15px;">
                                 ${item.text}
                             </a>
@@ -333,19 +415,19 @@ export function updatePreview() {
                     <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Enviar</button>
                 </form>
             </section>
-            
-            <!-- Galeria -->
-            <section style="padding: 40px 20px; background-color: ${galleryBgColor};">
-                <div style="display: grid; grid-template-columns: repeat(${galleryColumns}, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
-                    ${state.galleryItems.map(item => `
-                        <div style="background-color: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                            <h3 style="margin-top: 0;">${item.title}</h3>
-                            <p>${item.description}</p>
-                        </div>
-                    `).join('')}
+             <!-- Galeria -->
+    <section style="padding: 40px 20px; background-color: ${galleryBgColor};">
+        <div style="display: grid; grid-template-columns: repeat(${galleryColumns}, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto;">
+            ${state.galleryItems.map(item => `
+                <div style="background-color: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    ${item.image ? `<img src="${item.image}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 10px;">` : ''}
+                    <h3 style="margin-top: 0;">${item.title}</h3>
+                    <p>${item.description}</p>
                 </div>
-            </section>
-            
+            `).join('')}
+        </div>
+    </section>
+                
             <!-- API Interativa -->
             ${state.interactiveApiData ? `
                 <section style="padding: 40px 20px; background-color: #f5f5f5;">
@@ -388,6 +470,7 @@ export function updatePreview() {
     
     preview.innerHTML = html;
 }
+
 // Mostra o código HTML gerado
 export function showGeneratedCode() {
     const preview = document.getElementById('preview');
@@ -404,7 +487,7 @@ export function showGeneratedCode() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Gerada</title>
     <style>
-        /* Estilos básicos para manter a estrutura */
+        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -461,40 +544,6 @@ function formatHTML(html) {
     
     return result.join('\n');
 }
-/*Mostra o código HTML gerado
-export function showGeneratedCode() {
-    try {
-        const preview = document.getElementById('preview');
-        const generatedCode = document.getElementById('generatedCode');
-        
-        if (!preview || !generatedCode) {
-            console.error('Elementos não encontrados: #preview ou #generatedCode');
-            return;
-        }
-
-        const html = preview.innerHTML;
-        
-        if (!html) {
-            generatedCode.value = 'Nenhum conteúdo gerado ainda. Adicione elementos e atualize a visualização.';
-            return;
-        }
-
-        // Formatação básica do HTML para exibição
-        const formattedHtml = html
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/\n/g, '\n')
-            .replace(/\t/g, '    ');
-
-        generatedCode.value = formattedHtml;
-    } catch (error) {
-        console.error('Erro ao gerar código:', error);
-        const generatedCode = document.getElementById('generatedCode');
-        if (generatedCode) {
-            generatedCode.value = `Erro ao gerar código: ${error.message}`;
-        }
-    }
-}*/
 
 // Funções de armazenamento local
 export function saveToStorage() {
@@ -558,7 +607,3 @@ export function setState(newState) {
     Object.assign(state, newState);
     updatePreview();
 }
-
-// Debug (opcional)
-console.log('editorModule.js carregado');
-window.__editorState = state;
